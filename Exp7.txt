@@ -1,0 +1,67 @@
+pip install PyPDF2
+pip install python-docx
+# importing required modules
+import PyPDF2
+# creating a pdf file object
+pdfFileObj = open(r"D:\College\TE\SEM-2\Practical\DSBDA\7\sample1.pdf", 'rb')
+# creating a pdf reader object
+pdfReader = PyPDF2.PdfFileReader(pdfFileObj)
+# printing number of pages in pdf file
+print(pdfReader.numPages)
+# creating a page object
+pageObj = pdfReader.getPage(0)
+# extracting text from page
+print(pageObj.extractText())
+# closing the pdf file object
+pdfFileObj.close()
+# import docx NOT python-docx
+import docx
+# create an instance of a word document
+doc = docx.Document()
+# add a heading of level 0 (largest heading)
+doc.add_heading('Heading for the document', 0)
+# add a paragraph and store
+# the object in a variable
+doc_para = doc.add_paragraph('Your paragraph goes here, ')
+# add a run i.e, style like
+# bold, italic, underline, etc.
+doc_para.add_run('hey there, bold here').bold = True
+doc_para.add_run(', and ')
+doc_para.add_run('these words are italic').italic = True
+# add a page break to start a new page
+doc.add_page_break()
+# add a heading of level 2
+doc.add_heading('Heading level 2', 2)
+# pictures can also be added to our word document
+# width is optional
+doc.add_picture(r"D:\College\TE\SEM-2\Practical\DSBDA\7\index.jpg")
+# now save the document to a location
+doc.save('new_doc')
+pip install nltkimport nltk
+nltk.download()
+nltk.download('punkt')
+#Sentence Tokenization
+sentence_data = "The First sentence is about Python. The Second: about Django. You can python ,django here"
+nltk_tokens = nltk.sent_tokenize(sentence_data)
+print (nltk_tokens)
+#Non English language Tokenization
+german_tokenizer = nltk.data.load('tokenizers/punkt/german.pickle')
+german_tokens=german_tokenizer.tokenize('Wie geht es Ihnen? Gut, danke.')
+print(german_tokens)
+#Word Tokenization
+word_data = "It originated from the idea that there are readers who prefer learning new
+nltk_tokens = nltk.word_tokenize(word_data)
+print (nltk_tokens)
+#Word Tokenization
+from nltk.corpus import stopwords
+from nltk.tokenize import word_tokenize, sent_tokenize
+#Dummy text
+txt = "He is a boy. "\
+"She is a girl"
+word_tokens = word_tokenize(txt)
+print(word_tokens)
+
+
+
+
+
