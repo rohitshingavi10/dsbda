@@ -1,31 +1,19 @@
 import pandas as pd
+import numpy as np
+from sklearn import linear_model
 from sklearn.model_selection import train_test_split
-from sklearn.linear_model import LinearRegression
-from sklearn.metrics import mean_squared_error, r2_score
-import matplotlib.pyplot as plt
-data = pd.read_csv('HousingData.csv')
-print(data.head())  # Check the first few rows of the dataset
-print(data.info())
-X = data.drop('CRIM', axis=1)  # Features
-y = data['CRIM']  # Target variable
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
-model = LinearRegression()
-print(X_train.isnull().sum())  # Check for missing values in features
-print(y_train.isnull().sum())
-X_train.fillna(X_train.mean(), inplace=True)
-y_train.fillna(y_train.mean(), inplace=True)
-model.fit(X_train, y_train)
-y_pred = model.predict(X_test)
-mse = mean_squared_error(y_test, y_pred)
-r2 = r2_score(y_test, y_pred)
-print('Mean Squared Error:', mse)
-print('R^2 Score:', r2)
-print(X_test.isnull().sum())  # Check for missing values in test features
-print(y_test.isnull().sum()) 
-X_test.fillna(X_test.mean(), inplace=True)
-y_test.fillna(y_test.mean(), inplace=True)
-y_pred = model.predict(X_test)
-mse = mean_squared_error(y_test, y_pred)
-r2 = r2_score(y_test, y_pred)
-print('Mean Squared Error:', mse)
-print('R^2 Score:', r2)
+from sklearn.datasets import load_boston
+boston = load_boston()
+print(boston)
+boston.feature_names
+boston.target
+x = pd.DataFrame(boston.data, columns = boston.feature_names)
+y = pd.DataFrame(boston.target)
+x.head(10)
+y.head(10)
+reg = linear_model.LinearRegression()
+x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.20, random_state=4
+reg.fit(x_train, y_train)
+print(reg.coef_)
+y_pred = reg.predict(x_test)
+print(y_pred)
